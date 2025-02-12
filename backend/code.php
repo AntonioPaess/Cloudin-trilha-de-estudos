@@ -15,7 +15,7 @@ if(isset($_POST['save_contact']))
         'email' => $email,
         'phone' => $phone
     ];
-    $ref_table = "Contacts";
+    $ref_table = "contacts";
     $postRef_result = $database->getReference($ref_table)->push($postData);
 
     if($postRef_result)
