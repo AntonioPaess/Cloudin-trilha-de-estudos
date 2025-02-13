@@ -5,6 +5,33 @@ ini_set('display_errors', 1);
 session_start();
 include('dbcon.php');
 
+if(isset($_POST['delete_btn']))
+{
+    $del_id = $_POST['delete_btn'];
+    
+    $ref_table = 'contacts/'.$del_id;
+    try {
+        $deletequery_result = $database->getReference($ref_table)->remove();
+        if($deletequery_result) {
+            $_SESSION['status'] = "Contact deleted successfully";
+            header('Location: index.php');
+            exit();
+        }
+    } catch (Exception $e) {
+        $_SESSION['status'] = "Erro, contact not deleted: " . $e->getMessage();
+        header('Location: index.php');
+        exit();
+    }
+}
+
+
+
+
+
+
+
+
+
 if(isset($_POST['update']))
 {    
     $key = $_POST['key'];
