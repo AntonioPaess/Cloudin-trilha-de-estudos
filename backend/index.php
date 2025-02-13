@@ -49,14 +49,14 @@ include('includes/header.php');
                                     ?>
                                         <tr>
                                             <td><?= $i++; ?></td>
-                                            <td><?=$row['fname']?></td>
-                                            <td><?=$row['lname']?></td>
+                                            <td><?=$row['first_name']?></td>
+                                            <td><?=$row['last_name']?></td>
                                             <td><?=$row['email']?></td>
                                             <td><?=$row['phone']?></td>
                                             <td>
-                                                <a href="edit-contact.php" class="btn btn-primary btn-sm">Edit</a>
+                                                <a href="edit-contact.php?id=<?= $key;?>" class="btn btn-primary btn-sm">Edit</a>
                                             </td>
-                                            <td>
+                                            <td> 
                                                 <a href="delete-contact.php" class="btn btn-danger btn-sm">Delete</a>
                                             </td>
                                         </tr>
