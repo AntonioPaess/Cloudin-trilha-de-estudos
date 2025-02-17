@@ -1,5 +1,10 @@
 <?php
 session_start();
+if (isset($_SESSION['verified_user_id'])) {
+    $_SESSION['status'] = "You are already Logged in.";
+    header('Location: home.php');
+    exit();
+} 
 include('includes/header.php');
 ?>
 
