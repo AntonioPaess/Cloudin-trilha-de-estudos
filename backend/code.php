@@ -5,6 +5,43 @@ ini_set('display_errors', 1);
 session_start();
 include('dbcon.php');
 
+if(isset($_POST['register_btn']))
+{
+    $full_name = $_POST['full_name'];
+    $phone = $_POST['phone'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $userProperties = [
+        'email' => $email,
+        'emailVerified' => false,
+        'phoneNumber' => '+55'.$phone,
+        'password' => $password,
+        'displayName' => $full_name,
+    ];
+    
+    $createdUser = $auth->createUser($userProperties);
+
+    if($createdUser)
+    {
+        $_SESSION['status'] = "User registered successfully";
+        header('Location: index.php');
+        exit();
+    }
+    else
+    {
+        $_SESSION['status'] = "User not registered";
+        header('Location: register.php');
+        exit();
+    }
+}
+
+
+
+
+
+
+
 if(isset($_POST['delete_btn']))
 {
     $del_id = $_POST['delete_btn'];

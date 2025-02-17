@@ -5,6 +5,8 @@ include('includes/header.php');
 
 <div class="container">
     <div class="row">
+
+    
         <div class="col-md-12">
             <?php
             if (isset($_SESSION['status'])) {
@@ -92,6 +94,20 @@ include('includes/header.php');
 
         </div>
     </div>
+    <div class="col-md-3">
+    
+        <div class="card">
+            <div class="card-body">
+                <h5>Total Number of Records:
+                    <?php
+                    $ref_table = 'contacts';
+                    $totalresult = $database->getReference($ref_table)->getSnapshot()->numChildren();
+                    echo $totalresult;
+                    ?>
+                </h5>
+            </div>
+        </div>
+        </div>
 </div>
 
 <?php
