@@ -8,6 +8,20 @@ if(isset($_SESSION['verified_user_id'])) {
     $userId = $_SESSION['verified_user_id'];
     $storeInfo = getStoreInfo($userId);
 }
+
+// Pega o token da URL
+$store_token = isset($_GET['store']) ? $_GET['store'] : null;
+
+if ($store_token) {
+    // Busca a loja pelo token
+    $reference = $database->getReference('stores')->orderByChild('store_token')->equalTo($store_token);
+    $snapshot = $reference->getValue();
+    
+    if ($snapshot) {
+        $store_data = current($snapshot);
+        // Usa $store_data para mostrar as informações da loja
+    }
+}
 ?>
 
 <div class="container">
@@ -48,7 +62,7 @@ if(isset($_SESSION['verified_user_id'])) {
                             <?php
                             include('dbcon.php');
 
-                            $ref_table = 'store/product';
+                            $ref_table = 'stores/' . $userId . '/products';
                             $fetchdata = $database->getReference($ref_table)->getValue();
 
                             if($fetchdata > 0)

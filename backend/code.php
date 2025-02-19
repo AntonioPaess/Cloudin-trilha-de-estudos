@@ -12,32 +12,42 @@ if(isset($_POST['personalize_store']))
     $primary_color = $_POST['primary_color'];
     $secondary_color = $_POST['secondary_color'];
  
+    // Cria um token baseado no nome da loja
+    $store_token = strtolower(preg_replace('/[^A-Za-z0-9-]/', '-', $store_name));
+    
     $postData = [
         'store_name' => $store_name,
         'description' => $description,
         'primary_color' => $primary_color,
         'secondary_color' => $secondary_color,
-    
+        'store_token' => $store_token
     ];
-    $ref_table = "stores";
-    $postRef_result = $database->getReference($ref_table)->push($postData);
+
+    // Usa o ID do usuário logado para salvar os dados
+    $uid = $_SESSION['verified_user_id'];
+    $ref_table = "stores/" . $uid;
+    
+    $postRef_result = $database->getReference($ref_table)->set($postData);
 
     if($postRef_result)
     {
+        // Atualiza a flag first_login para false
+        $database->getReference('users/'.$uid)->update([
+            'first_login' => false
+        ]);
+
         $_SESSION['status'] = "Store Personalized Successfully";
-        header('Location: mystore.php');
+        // Redireciona com o token na URL
+        header('Location: mystore.php?store=' . $store_token);
+        exit();
     }
     else
     {
         $_SESSION['status'] = "Store Not Personalized";
-        header('Location: mystore.php');
+        header('Location: store-personalize.php');
+        exit();
     }
 }
-
-
-
-
-
 
 if(isset($_POST['register_btn']))
 {
@@ -63,7 +73,7 @@ if(isset($_POST['register_btn']))
         if($createdUser)
         {
             $_SESSION['status'] = "User registered successfully";
-            header('Location: login.php');
+            header('Location: login.php=');
             exit();
         }
     }
@@ -73,12 +83,6 @@ if(isset($_POST['register_btn']))
         exit();
     }
 }
-
-
-
-
-
-
 
 if(isset($_POST['delete_btn']))
 {
@@ -98,14 +102,6 @@ if(isset($_POST['delete_btn']))
         exit();
     }
 }
-
-
-
-
-
-
-
-
 
 if(isset($_POST['update']))
 {    

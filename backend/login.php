@@ -1,10 +1,16 @@
 <?php
 session_start();
+include('dbcon.php');
+
+// Pega o token da URL se existir
+$store_token = isset($_GET['store']) ? $_GET['store'] : '';
+
 if (isset($_SESSION['verified_user_id'])) {
     $_SESSION['status'] = "You are already Logged in.";
-    header('Location: home.php');
+    header('Location: mystore.php?store=' . $store_token);
     exit();
 } 
+
 
 include('includes/header.php');
 ?>
@@ -27,7 +33,7 @@ include('includes/header.php');
                         </h4>
                     </div>
                     <div class="card-body">
-                        <form action="logincode.php" method="POST">
+                        <form action="logincode.php<?php echo $store_token ? '?store=' . $store_token : ''; ?>" method="POST">
                             <div class="form-group mb-3">
                                 <label for="email">Email adress:</label>
                                 <input type="email" id="email" name="email" class="form-control" required maxlength="100">

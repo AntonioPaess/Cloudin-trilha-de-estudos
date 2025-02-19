@@ -1,7 +1,30 @@
 <?php
+
 include('auth.php');
 include('includes/header.php');
+require_once('includes/Token.php');
+
+$storeInfo = null;
+if(isset($_SESSION['verified_user_id'])) {
+    $userId = $_SESSION['verified_user_id'];
+    $storeInfo = getStoreInfo($userId);
+}
+
+// Pega o token da URL
+$store_token = isset($_GET['store']) ? $_GET['store'] : null;
+
+if ($store_token) {
+    // Busca a loja pelo token
+    $reference = $database->getReference('stores')->orderByChild('store_token')->equalTo($store_token);
+    $snapshot = $reference->getValue();
+    
+    if ($snapshot) {
+        $store_data = current($snapshot);
+        // Usa $store_data para mostrar as informações da loja
+    }
+}
 ?>
+
 
 <div class="container">
     <div class="row">

@@ -29,7 +29,7 @@ include('includes/header.php');
                         <form action="code.php" method="POST">
                             <div class="form-group mb-3">
                                 <label for="admin_name">Admin Name:</label>
-                                <input type="text" id="admin_name" name="admin_name" class="form-control" required maxlength="50">
+                                <input type="text" id="admin_name" name="admin_name" class="form-control" title="Please enter your store name for your link" required maxlength="50">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="email">Admin Email:</label>

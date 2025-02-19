@@ -10,6 +10,7 @@ function getStoreInfo($userId) {
         
         return $snapshot ? $snapshot : null;
     } catch (Exception $e) {
+        
         return null;
     }
 }
