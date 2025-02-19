@@ -8,7 +8,7 @@ include('includes/header.php');
             <div class="card">
                 <div class="card-header">
                     <h4>
-                        Add Contacts
+                        Personalize your Store
                         <a href="index.php" class="btn btn-danger float-end">BACK</a>
                     </h4>
                 </div>
@@ -31,7 +31,7 @@ include('includes/header.php');
                             <input type="tel" id="phone" name="phone" class="form-control" required pattern="[0-9]{10,}" title="Please enter a valid phone number">
                         </div>
                         <div class="form-group mb-3">
-                            <button type="submit" name="save_contact" class="btn btn-primary">Save contact</button>
+                            <button type="submit" name="save_contact" class="btn btn-primary">Save your store</button>
                         </div>
                     </form>
                 </div>

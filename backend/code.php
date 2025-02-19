@@ -5,31 +5,69 @@ ini_set('display_errors', 1);
 session_start();
 include('dbcon.php');
 
+if(isset($_POST['personalize_store']))
+{
+    $store_name = $_POST['store_name'];
+    $description = $_POST['description'];
+    $primary_color = $_POST['primary_color'];
+    $secondary_color = $_POST['secondary_color'];
+ 
+    $postData = [
+        'store_name' => $store_name,
+        'description' => $description,
+        'primary_color' => $primary_color,
+        'secondary_color' => $secondary_color,
+    
+    ];
+    $ref_table = "stores";
+    $postRef_result = $database->getReference($ref_table)->push($postData);
+
+    if($postRef_result)
+    {
+        $_SESSION['status'] = "Store Personalized Successfully";
+        header('Location: mystore.php');
+    }
+    else
+    {
+        $_SESSION['status'] = "Store Not Personalized";
+        header('Location: mystore.php');
+    }
+}
+
+
+
+
+
+
 if(isset($_POST['register_btn']))
 {
-    $full_name = $_POST['full_name'];
-    $phone = $_POST['phone'];
+    $admin_name = $_POST['admin_name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
 
     $userProperties = [
         'email' => $email,
         'emailVerified' => false,
-        'phoneNumber' => '+55'.$phone,
         'password' => $password,
-        'displayName' => $full_name,
+        'displayNameStore' => $store_name,
     ];
     
-    $createdUser = $auth->createUser($userProperties);
-
-    if($createdUser)
-    {
-        $_SESSION['status'] = "User registered successfully";
-        header('Location: index.php');
-        exit();
+    try {
+        $createdUser = $auth->createUser($userProperties);
+        
+        // Adiciona flag de primeiro login
+        $database->getReference('users/'.$createdUser->uid)->set([
+            'first_login' => true
+        ]);
+        
+        if($createdUser)
+        {
+            $_SESSION['status'] = "User registered successfully";
+            header('Location: login.php');
+            exit();
+        }
     }
-    else
-    {
+    catch (\Kreait\Firebase\Exception\Auth\EmailExists $e) {
         $_SESSION['status'] = "User not registered";
         header('Location: register.php');
         exit();
@@ -46,7 +84,7 @@ if(isset($_POST['delete_btn']))
 {
     $del_id = $_POST['delete_btn'];
     
-    $ref_table = 'contacts/'.$del_id;
+    $ref_table = 'stores/'.$del_id;
     try {
         $deletequery_result = $database->getReference($ref_table)->remove();
         if($deletequery_result) {
@@ -85,7 +123,7 @@ if(isset($_POST['update']))
     ];
 
     
-    $ref_table = 'contacts/'.$key;
+    $ref_table = 'stores/'.$key;
     try {
         $updatequery_result = $database->getReference($ref_table)->update($updateData);
         
@@ -114,7 +152,7 @@ if(isset($_POST['save_contact']))
         'email' => $email,
         'phone' => $phone
     ];
-    $ref_table = "contacts";
+    $ref_table = "stores/.$key/products";
     $postRef_result = $database->getReference($ref_table)->push($postData);
 
     if($postRef_result)

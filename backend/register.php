@@ -21,22 +21,18 @@ include('includes/header.php');
                 <div class="card">
                     <div class="card-header">
                         <h4>
-                            Register
+                            Store Register
                             <a href="index.php" class="btn btn-danger float-end">BACK</a>
                         </h4>
                     </div>
                     <div class="card-body">
                         <form action="code.php" method="POST">
                             <div class="form-group mb-3">
-                                <label for="first_name">Full name:</label>
-                                <input type="text" id="first_name" name="full_name" class="form-control" required maxlength="50">
+                                <label for="admin_name">Admin Name:</label>
+                                <input type="text" id="admin_name" name="admin_name" class="form-control" required maxlength="50">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="phone">Phone number:</label>
-                                <input type="tel" id="phone" name="phone" class="form-control" required maxlength="50">
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="email">Email adress:</label>
+                                <label for="email">Admin Email:</label>
                                 <input type="email" id="email" name="email" class="form-control" required maxlength="100">
                             </div>
                             <div class="form-group mb-3">
@@ -44,7 +40,7 @@ include('includes/header.php');
                                 <input type="password" id="password" name="password" class="form-control" title="Please enter your password" required maxlength="50">
                             </div>
                             <div class="form-group mb-3">
-                                <button type="submit" name="register_btn" class="btn btn-primary">Register</button>
+                                <button type="submit" name="register_btn" class="btn btn-primary">Register My Store</button>
                             </div>
                         </form>
                     </div>

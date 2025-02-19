@@ -25,7 +25,7 @@ if (isset($_POST['login_btn'])) {
                 $_SESSION['idTokenString'] = $idTokenString;
                 
                 $_SESSION['status'] = "Logged in successfuly.";
-                header('Location: home.php');
+                header('Location: store-personalize.php');
                 exit();
 
             } catch (FailedToVerifyToken $e) {
