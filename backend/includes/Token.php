@@ -1,5 +1,5 @@
 <?php
-include('../dbcon.php');
+include(__DIR__ . '/../dbcon.php');
 
 function getStoreInfo($userId) {
     global $database;

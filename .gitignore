@@ -13,7 +13,7 @@ composer.lock
 # Firebase
 firebase.json
 firestore.rules
-php-firebase-exploration-firebase-adminsdk-fbsvc-8867f56bd2.json
+php-firebase-exploration-firebase-adminsdk-fbsvc-57b60124ea.json
 
 # Ambientes Virtuais Python (caso use futuramente)
 venv/
