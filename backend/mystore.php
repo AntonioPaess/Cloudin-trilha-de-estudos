@@ -30,8 +30,8 @@ if (isset($_SESSION['verified_user_id'])) {
 // Busca informações da loja pelo token
 if ($store_token) {
     try {
-        $reference = $database->getReference('stores')->orderByChild($store_token)->getValue();
-        $snapshot = $reference->getValues();
+        $snapshot = $database->getReference('stores')->orderByChild('store_token')->equalTo($store_token)->getValue();
+         
         
         if ($snapshot) {
             $store_data = current($snapshot);
@@ -60,10 +60,7 @@ if ($store_token) {
         }
     </style>
 
-<body>
-    <div class="container">
-        <h1><?php echo htmlspecialchars($storeName); ?></h1>
-        <p><?php echo htmlspecialchars($storeDescription); ?></p>
+
 
         <div class="container">
             <div class="row">

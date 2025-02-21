@@ -17,7 +17,6 @@ Este repositório documenta minha jornada de estudos e experimentação enquanto
 📂 cloudin-trilha-estudos
  ├── 📁 backend/                # Implementações em PHP e Firebase
  ├── 📁 automacao/              # Scripts e testes de automação
- ├── 📁 docs/                   # Documentação e anotações de aprendizado
  ├── .gitignore                 # Arquivos ignorados pelo Git
  ├── README.md                  # Descrição do projeto
 ```
